@@ -36,7 +36,7 @@ Embedded Methods: Tree-based Gini importance & L1 regularization scores.
 
 🖥️ Live Demo & Usage
 
-Open DataPilot_AI.html in any modern web browser.
+Open [DataPilot_AI.html](https://datapilot-app-sigma.vercel.app) in any modern web browser.
 
 Click "Load Sample Dataset" to test immediately with housing price data, or upload your own CSV file.
 
