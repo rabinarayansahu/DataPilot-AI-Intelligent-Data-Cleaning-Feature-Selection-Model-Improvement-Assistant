@@ -402,7 +402,7 @@ const SAMPLE_HOUSING = `sqft,bedrooms,bathrooms,age,garage,neighborhood,price
 980,2,1,30,0,Riverside,198000
 1720,3,2,8,1,Midtown,355000
 2600,5,4,2,2,Uptown,612000
-1300,3,2,20,1,Riverside,265000
+1300,3,2,,1,Riverside,265000
 1900,4,3,10,2,Midtown,418000
 1100,2,1,25,0,Riverside,220000
 2400,4,3,4,2,Uptown,571000
@@ -617,7 +617,11 @@ function runHealthScan(){
   });
 
   state.healthIssues = issues;
-  const healthScore = Math.max(30, Math.min(100, 100 - Math.round((totalMissing / (rows.length * fields.length) * 50) + (duplicates / rows.length * 50))));
+  
+  // Real health score calculation based on flaw ratio
+  const totalCells = rows.length * fields.length;
+  const totalFlaws = totalMissing + (duplicates * fields.length) + (outliers * 0.5);
+  const healthScore = Math.max(20, Math.min(98, Math.round(100 - (totalFlaws / totalCells * 100))));
 
   document.getElementById('health-metrics').innerHTML = `
     <div class="metric-card"><div class="label">Missing Cells</div><div class="val" style="color:${totalMissing>0?'var(--warning)':'var(--accent)'}">${totalMissing}</div></div>
